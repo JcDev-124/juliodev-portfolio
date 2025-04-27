@@ -6,10 +6,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.ElementCollection;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import java.util.List;
 
 @Entity
 @Table(name = "projects")
@@ -17,7 +19,6 @@ import lombok.AllArgsConstructor;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +26,10 @@ public class Project {
     private String name;
     private String description;
     private String imageBase64;
-    private String technologies;
+    
+    @ElementCollection
+    private List<String> technologies;
+    private String stack;
     private String link;
 
     public static Project fromDTO(ProjectDTO dto) {
@@ -34,6 +38,7 @@ public class Project {
         project.setDescription(dto.description());
         project.setImageBase64(dto.imageBase64());
         project.setTechnologies(dto.technologies());
+        project.setStack(dto.stack());
         project.setLink(dto.link());
         return project;
     }
