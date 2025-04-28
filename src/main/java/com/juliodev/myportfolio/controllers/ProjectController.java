@@ -12,6 +12,7 @@ import com.juliodev.myportfolio.dtos.ProjectDTO;
 import java.util.List;
 import java.util.stream.Collectors; 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
 @RequestMapping("/api/projects")
@@ -38,5 +39,11 @@ public class ProjectController {
             .map(ProjectDTO::fromProject)
             .collect(Collectors.toList());
         return new ResponseEntity<>(projectDTOs, HttpStatus.OK);
-    }   
+    }  
+
+    @DeleteMapping("/clear")
+    public ResponseEntity<Void> clearDatabase() {
+        projectService.deleteAllProjects();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

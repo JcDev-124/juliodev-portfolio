@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Portfolio</title>
+</head>
+<body>
+    <h1>My Projects</h1>
+    <ul>
+        <li th:each="project : ${projects}">
+            <h2 th:text="${project.name}"></h2>
+            <p th:text="${project.description}"></p>
+            <a th:href="${project.link}">View Project</a>
+        </li>
+    </ul>
+</body>
+</html>
