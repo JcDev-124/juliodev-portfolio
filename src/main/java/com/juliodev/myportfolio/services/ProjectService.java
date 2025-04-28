@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import com.juliodev.myportfolio.repositories.ProjectRepository;
 import com.juliodev.myportfolio.models.Project;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProjectService {
@@ -22,14 +23,34 @@ public class ProjectService {
     }
 
     public Project updateProject(Long id, Project project) {
-        return projectRepository.save(project);
+        Optional<Project> existingProject = projectRepository.findById(id);
+        if (existingProject.isPresent()) {
+            Project projectToUpdate = existingProject.get();
+            projectToUpdate.setName(project.getName());
+            projectToUpdate.setDescription(project.getDescription());
+            projectToUpdate.setImageBase64(project.getImageBase64());
+            projectToUpdate.setTechnologies(project.getTechnologies());
+            projectToUpdate.setStack(project.getStack());
+            projectToUpdate.setLink(project.getLink());
+            return projectRepository.save(projectToUpdate);
+        }
+        return null;
     }   
 
-    public void deleteProject(Long id) {
-        projectRepository.deleteById(id);
+    public boolean deleteProject(Long id) {
+        Optional<Project> project = projectRepository.findById(id);
+        if (project.isPresent()) {
+            projectRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     public void deleteAllProjects() {
         projectRepository.deleteAll();
+    }
+
+    public Project getProjectById(Long id) {
+        return projectRepository.findById(id).orElse(null);
     }
 }

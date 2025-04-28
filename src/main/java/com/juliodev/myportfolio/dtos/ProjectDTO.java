@@ -3,6 +3,7 @@ import com.juliodev.myportfolio.models.Project;
 import java.util.List;
 
 public record ProjectDTO(
+    Long id,
     String name,
     String description,
     String imageBase64,
@@ -13,6 +14,7 @@ public record ProjectDTO(
     
     public static ProjectDTO fromProject(Project project) {
         return new ProjectDTO(
+            project.getId(),
             project.getName(), 
             project.getDescription(), 
             project.getImageBase64(), 
