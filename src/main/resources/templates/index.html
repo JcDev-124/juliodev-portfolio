@@ -2,15 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>My Portfolio</title>
+    <link href="/css/output.css" rel="stylesheet">
 </head>
-<body>
-    <h1>My Projects</h1>
-    <ul>
-        <li th:each="project : ${projects}">
-            <h2 th:text="${project.name}"></h2>
-            <p th:text="${project.description}"></p>
-            <a th:href="${project.link}">View Project</a>
-        </li>
-    </ul>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8 text-gray-800">My Projects</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div th:each="project : ${projects}" class="project-card">
+                <!-- Imagem do projeto -->
+                <div class="mb-4">
+                    <img th:if="${project.imageBase64 != null}" 
+                         th:src="'data:image/jpeg;base64,' + ${project.imageBase64}" 
+                         alt="Project Image" 
+                         class="w-full h-48 object-cover rounded-lg">
+                </div>
+                
+                <!-- Título e Stack -->
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="project-title" th:text="${project.name}"></h2>
+                    <span class="stack-badge" th:text="${project.stack}"></span>
+                </div>
+                
+                <!-- Descrição -->
+                <p class="project-description" th:text="${project.description}"></p>
+                
+                <!-- Tecnologias -->
+                <div class="mb-4">
+                    <span th:each="tech : ${project.technologies}" 
+                          class="tech-badge" 
+                          th:text="${tech}">
+                    </span>
+                </div>
+                
+                <!-- Link do projeto -->
+                <a th:href="${project.link}" 
+                   class="project-link" 
+                   target="_blank">
+                    View Project
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
