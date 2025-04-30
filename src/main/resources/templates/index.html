@@ -68,6 +68,20 @@
     <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Meus Projetos</h2>
+            
+            <!-- Campo de Busca -->
+            <div class="flex justify-start mb-6">
+                <div class="relative w-64">
+                    <input type="text" 
+                           id="searchInput" 
+                           class="w-full px-4 py-2 pl-10 text-sm text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-full focus:outline-none focus:border-blue-500 dark:focus:border-blue-400" 
+                           placeholder="Procure por palavras-chaves">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400 dark:text-gray-500 text-sm"></i>
+                    </div>
+                </div>
+            </div>
+
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div th:each="project : ${projects}" class="project-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
                     <div class="mb-4">
@@ -167,5 +181,8 @@
             <p>&copy; 2024 Julio Cesar. Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <script src="/js/theme.js" defer></script>
+    <script src="/js/projects.js" defer></script>
 </body>
 </html>

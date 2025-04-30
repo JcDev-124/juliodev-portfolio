@@ -10,6 +10,8 @@ services:
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
       - SPRING_FLYWAY_ENABLED=true
+    env_file:
+      - .env
     depends_on:
       - db
     networks:
@@ -18,7 +20,7 @@ services:
   db:
     image: postgres:15
     ports:
-      - "5432:5432"
+      - "5433:5432"
     environment:
       - POSTGRES_DB=myportfolio
       - POSTGRES_USER=postgres
